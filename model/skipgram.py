@@ -5,12 +5,13 @@ from model.embeddings import Embedding
 
 class SkipGram(nn.Module):
 
-    def __init__(self, vocabulary_size: int, d_model: int):
+    def __init__(self, config, vocabulary_size):
 
         super().__init__()
 
-        self.input_embeddings = Embedding(vocabulary_size, d_model)
-        self.output_embeddings = Embedding(vocabulary_size, d_model)
+        self.config = config
+        self.input_embeddings = Embedding(vocabulary_size, self.config.d_model)
+        self.output_embeddings = Embedding(vocabulary_size, self.config.d_model)
 
 
     def forward(self, center_word_idxs: torch.Tensor) -> torch.Tensor:
